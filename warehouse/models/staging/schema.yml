@@ -1,0 +1,29 @@
+
+version: 2
+
+models:
+
+  - name: reshape_waterdata
+    description: "Transforms waterdata by reshaping time and values arrays into individual rows"
+    columns:
+      - name: _AIRBYTE_RAW_ID
+        description: "The primary key for this table"
+        tests:
+          - unique
+          - not_null
+      - name: _AIRBYTE_EXTRACTED_AT
+        description: "Timestamp of when the data was extracted"
+        tests:
+          - not_null
+      - name: _AIRBYTE_META
+        description: "Metadata for the extracted data"
+        tests:
+          - not_null
+      - name: time
+        description: "The timestamp for the measurement"
+        tests:
+          - not_null
+      - name: temperature
+        description: "The temperature value"
+        tests:
+          - not_null

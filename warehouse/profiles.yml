@@ -1,0 +1,17 @@
+warehouse:
+  target: dev
+  outputs:
+    dev:
+      type: snowflake
+      account: 
+
+      # User/password auth
+      user: 
+      password: 
+
+      role: ACCOUNTADMIN
+      database: DW
+      warehouse: XSMALL_WH
+      schema: RAW
+      threads: 12
+      client_session_keep_alive: False

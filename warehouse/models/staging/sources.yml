@@ -1,0 +1,31 @@
+version: 2
+
+sources:
+  - name: api_response
+    database: DW
+    schema: raw
+    tables:
+      - name: tb_waterData
+      - name: tb_windData
+      - name: tb_wavesData
+      - name: bop_waterData
+      - name: bop_windData
+      - name: bop_wavesData
+
+  - name: historical_data
+    database: DW
+    schema: raw
+    tables:
+      - name: tb_waterData_hist
+      - name: tb_windData_hist
+      - name: tb_wavesData_hist
+      - name: bop_waterData_hist
+      - name: bop_windData_hist
+      - name: bop_wavesData_hist
+  
+  - name: marts
+    database: DW
+    schema: RAW_MARTS
+    tables:
+      - name: DIM_TEMPERATURE
+      - name: DIM_WIND
