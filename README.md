@@ -42,3 +42,17 @@ Business process modeling (What business process are you going to model?)
 - Use time as incremental column to generate the complete datasets for each region + data type in the silver schema
 - Use data modelling concepts to generate dim and fact tables
 - Create a streamlit project to showcase the data
+
+## Steps to build a dbt project
+
+- create a .venv with 
+- activate it:
+- run `dbt init` and add all information required
+- create a profiles.yml inside the folder (check data_transformation/profiles.yml file)
+- go to your terminal and specify your env variables:
+
+`export SNOWFLAKE_USER=...`
+`export SNOWFLAKE_PASSWORD=...`
+
+- create a packages.yml file (check data_transformation/packages.yml) and run `dbt deps`
+- run `dbt run`

@@ -1,3 +1,4 @@
+-- depends_on: {{ ref('bop_waterData_parsed') }}
 {{
     incremental_load_with_hist(
         source_hist_name='historical_data', 

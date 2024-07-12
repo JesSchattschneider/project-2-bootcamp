@@ -1,3 +1,5 @@
+-- depends_on: {{ ref('tb_wavesData_parsed') }}
+
 {{
     incremental_load_with_hist(
         source_hist_name='historical_data', 
