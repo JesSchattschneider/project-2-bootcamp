@@ -36,9 +36,13 @@ bop_winddata as (
     {% endif %}
 ),
 combined_data as (
-    select * from tb_winddata
-    union all
-    select * from bop_winddata
+    select time, region, AVG(gust) as gust, AVG(speed) as speed, AVG(direction) as direction
+    from (
+        select * from tb_winddata
+        union all
+        select * from bop_winddata
+    ) all_data
+    group by time, region
 )
 
 select 
@@ -50,3 +54,4 @@ select
     direction,
     current_timestamp() as last_updated
 from combined_data
+

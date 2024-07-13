@@ -23,9 +23,21 @@ sources:
       - name: bop_windData_hist
       - name: bop_wavesData_hist
   
+  - name: silver
+    database: DW
+    schema: RAW_SILVER
+    tables:
+      - name: tb_waterData_silver
+      - name: tb_windData_silver
+      - name: tb_wavesData_silver
+      - name: bop_waterData_silver
+      - name: bop_windData_silver
+      - name: bop_wavesData_silver
+  
   - name: marts
     database: DW
     schema: RAW_MARTS
     tables:
       - name: DIM_TEMPERATURE
       - name: DIM_WIND
+
