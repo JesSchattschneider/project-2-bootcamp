@@ -1,0 +1,12 @@
+models:
+  - name: tb_windData
+    columns:
+      - name: TIME
+        tests:
+          - not_null
+          - datetime_test  # Custom test
+      - name: REGION
+        tests:
+          - not_null
+          - accepted_values:
+              values: ["tb"]

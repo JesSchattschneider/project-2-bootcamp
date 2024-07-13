@@ -1,0 +1,20 @@
+models:
+  - name: dim_wind
+    columns:
+      - name: wind_key
+        tests:
+          - unique
+          - not_null
+      - name: last_updated
+        tests:
+          - not_null
+      - name: REGION
+        tests:
+          - not_null
+          - accepted_values:
+              values: ["tb", "bop"]
+      - name: TIME
+        tests:
+          - unique
+          - not_null
+          - datetime_test  # Custom test              

@@ -31,7 +31,7 @@ wind_data AS (
         GUST,
         SPEED,
         DIRECTION,
-        CURRENT_TIMESTAMP() AS LAST_UPDATED  -- Define LAST_UPDATED here
+        CURRENT_TIMESTAMP() AS LAST_UPDATED
     FROM {{ source('marts', 'DIM_WIND') }}
     {% if is_incremental() %}
     WHERE TIME > {{ max_time }}
@@ -40,15 +40,15 @@ wind_data AS (
 
 joined_data AS (
     SELECT
-        t.TIME AS temperature_time,
-        t.REGION AS temperature_region,
+        COALESCE(t.TIME, w.TIME) AS TIME,
+        COALESCE(t.REGION, w.REGION) AS REGION,
         t.TEMPERATURE_KEY,
         t.TEMPERATURE,
         w.WIND_KEY,
         w.GUST,
         w.SPEED,
         w.DIRECTION,
-        w.LAST_UPDATED  -- Include LAST_UPDATED from wind_data alias w
+        COALESCE(w.LAST_UPDATED, CURRENT_TIMESTAMP()) AS LAST_UPDATED  -- Ensure LAST_UPDATED is always populated
     FROM temperature_data t
     FULL OUTER JOIN wind_data w
     ON t.TIME = w.TIME AND t.REGION = w.REGION
@@ -57,19 +57,19 @@ joined_data AS (
 fact_data AS (
     SELECT
         md5(CONCAT(
-        COALESCE({{ dbt_utils.generate_surrogate_key(['j.TEMPERATURE_KEY']) }}, ''),
-        '-',
-        COALESCE({{ dbt_utils.generate_surrogate_key(['j.WIND_KEY']) }}, '')
-    )) AS fact_key,        
-        j.temperature_time AS TIME,
-        j.temperature_region AS REGION,
-        CASE WHEN j.TEMPERATURE_KEY IS NOT NULL THEN {{ dbt_utils.generate_surrogate_key(['j.TEMPERATURE_KEY']) }} END AS temperature_key,
-        CASE WHEN j.WIND_KEY IS NOT NULL THEN {{ dbt_utils.generate_surrogate_key(['j.WIND_KEY']) }} END AS wind_key,
+            COALESCE(j.TEMPERATURE_KEY, ''),
+            '-',
+            COALESCE(j.WIND_KEY, '')
+        )) AS fact_key,        
+        j.TIME,
+        j.REGION,
+        j.TEMPERATURE_KEY AS temperature_key,  -- Directly use the TEMPERATURE_KEY
+        j.WIND_KEY AS wind_key,  -- Directly use the WIND_KEY
         j.TEMPERATURE,
         j.GUST,
         j.SPEED,
         j.DIRECTION,
-        j.LAST_UPDATED  -- Refer to LAST_UPDATED from joined_data alias j
+        j.LAST_UPDATED
     FROM joined_data j
 )
 

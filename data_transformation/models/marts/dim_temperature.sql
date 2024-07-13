@@ -32,13 +32,17 @@ bop_waterdata as (
     {% endif %}
 ),
 combined_data as (
-    select * from tb_waterdata
-    union all
-    select * from bop_waterdata
+    select time, region, AVG(temperature) as temperature
+    from (
+        select * from tb_waterdata
+        union all
+        select * from bop_waterdata
+    ) all_data
+    group by time, region
 )
 
 select 
-    {{ dbt_utils.generate_surrogate_key(['time', 'region']) }} as temperature_key,
+    {{ dbt_utils.generate_surrogate_key(['time', 'region', 'temperature']) }} as temperature_key,
     time,
     region,
     temperature,
