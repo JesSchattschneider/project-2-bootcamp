@@ -91,4 +91,3 @@ fact-records:
 - last updated not null
 - region = tb or bop
 - all tempererature_key should be available on dim_temp (same for winf)
-
