@@ -1,5 +1,5 @@
 # Use Python 3.10 slim version as the base image
-FROM python:3.10-slim
+FROM python:3.9
 
 # Copy everything in your current directory to the /app directory in the container
 COPY . /app
