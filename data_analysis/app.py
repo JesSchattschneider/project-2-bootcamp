@@ -11,6 +11,7 @@ snowflake_user = os.environ.get('SNOWFLAKE_USER')
 snowflake_password = os.environ.get('SNOWFLAKE_PASSWORD')
 snowflake_account = os.environ.get('SNOWFLAKE_ACCOUNT')
 snowflake_warehouse = os.environ.get('SNOWFLAKE_WAREHOUSE')
+print(snowflake_warehouse)
 snowflake_database = os.environ.get('SNOWFLAKE_DATABASE')
 snowflake_schema = os.environ.get('SNOWFLAKE_SCHEMA')
 snowflake_table = 'FACT_RECORDS'
