@@ -31,7 +31,8 @@ jobs:
       with:
         push: true
         tags: crcommonscience.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_5f2295140f074355bc3e238882f1b0f7 }}/latest:${{ github.sha }}
-        file: ./Dockerfile
+        context: ./data_analysis
+        file: ./data_analysis/Dockerfile
 
   deploy:
     runs-on: ubuntu-latest
