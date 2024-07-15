@@ -65,41 +65,4 @@ Business process modeling (What business process are you going to model?)
 
 `docker run -it warehouse-dbt:2.0`
 
-`docker tag warehouse-dbt:2.0 905418180964.dkr.ecr.ap-southeast-2.amazonaws.com/dbt-warehouse-proj2:latest`
 
-`docker push 905418180964.dkr.ecr.ap-southeast-2.amazonaws.com/dbt-warehouse-proj2:latest`
-
-For tests:
-
-staging: 
-no tests
-
-silver (all tables):
-time not null and unique
-
-silver (bop):
-region == "bop"
-
-silver(tb):
-region == "tb"
-
-silver (waterdata):
-datatype: "waterdata"
-
-silver (wind):
-datatype: "winddata"
-
-
-marts:
-dim_temp: 
-temperature_key, time = not null and unique
-last_updated = not null
-
-same logic as above for dim_wind
-
-fact-records:
-- fact_key , time, unique and not null
-- temperature_key, wind_key, unique
-- last updated not null
-- region = tb or bop
-- all tempererature_key should be available on dim_temp (same for winf)

@@ -148,14 +148,14 @@ def main():
 
     # Display metric cards
     col1, col2 = st.columns(2)
-    col1.metric(f"Latest temperature (Updated at {temperature_last_record.strftime('%Y-%m-%d')})", data_summary[data_summary['VARIABLE_NAME'] == 'TEMPERATURE']['COUNT'].iloc[0])
-    col2.metric(f"Latest wind gust (Updated at {wind_gust_last_record.strftime('%Y-%m-%d')})", data_summary[data_summary['VARIABLE_NAME'] == 'GUST']['COUNT'].iloc[0])
+    col1.metric(f"Latest temperature (Updated at {temperature_last_record.strftime('%Y-%m-%d')})", data_summary[data_summary['VARIABLE_NAME'] == 'TEMPERATURE']['LAST_VALUE'].iloc[0])
+    col2.metric(f"Latest wind gust (Updated at {wind_gust_last_record.strftime('%Y-%m-%d')})", data_summary[data_summary['VARIABLE_NAME'] == 'GUST']['LAST_VALUE'].iloc[0])
 
 
     col3, col4 = st.columns(2)
     
-    col3.metric(f"Latest wind direction (Updated at {wind_direction_last_record.strftime('%Y-%m-%d')})", data_summary[data_summary['VARIABLE_NAME'] == 'DIRECTION']['COUNT'].iloc[0])
-    col4.metric(f"Latest wind speed (Updated at {wind_speed_last_record.strftime('%Y-%m-%d')})", data_summary[data_summary['VARIABLE_NAME'] == 'SPEED']['COUNT'].iloc[0])
+    col3.metric(f"Latest wind direction (Updated at {wind_direction_last_record.strftime('%Y-%m-%d')})", data_summary[data_summary['VARIABLE_NAME'] == 'DIRECTION']['LAST_VALUE'].iloc[0])
+    col4.metric(f"Latest wind speed (Updated at {wind_speed_last_record.strftime('%Y-%m-%d')})", data_summary[data_summary['VARIABLE_NAME'] == 'SPEED']['LAST_VALUE'].iloc[0])
 
     # Display the windrose plot
     st.plotly_chart(fig)
