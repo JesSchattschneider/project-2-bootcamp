@@ -1,6 +1,10 @@
 {{ config(
     materialized="incremental",
-    incremental_strategy="delete+insert"
+    incremental_strategy="delete+insert",
+    depends_on=[
+            'RAW_marts.dim_temperature',
+            'RAW_marts.dim_wind'
+        ]
 ) }}
 
 {% set max_time %}
