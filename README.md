@@ -57,6 +57,18 @@ Business process modeling (What business process are you going to model?)
 - create a packages.yml file (check data_transformation/packages.yml) and run `dbt deps`
 - run `dbt run`
 
+## Tests
+
+## Docker - dbt:
+
+`docker build . -t warehouse-dbt:2.0`
+
+`docker run -it warehouse-dbt:2.0`
+
+`docker tag warehouse-dbt:2.0 905418180964.dkr.ecr.ap-southeast-2.amazonaws.com/dbt-warehouse-proj2:latest`
+
+`docker push 905418180964.dkr.ecr.ap-southeast-2.amazonaws.com/dbt-warehouse-proj2:latest`
+
 For tests:
 
 staging: 
